@@ -34,7 +34,7 @@ for ($z = 1; $z -le 10; $z++) {
         $level2Id = $level2.id
         Write-Host "  Created $level2Type $z.$i with ID: $level2Id"
 
-        # Link Feature to Epic
+        # Link Level2 to Level1
         az boards work-item relation add `
             --id $level2Id `
             --relation-type "Parent" `
@@ -42,7 +42,7 @@ for ($z = 1; $z -le 10; $z++) {
 
         Write-Host "  Linked $level2Type $level2Id with ${$level1Type}: $level1Id"
 
-        # Create 10 User Stories under each Feature
+        # Create 10 Level3 under each Level2
         for ($j = 1; $j -le 10; $j++) {
             $level3Title = "$level3Type $z.$i.$j"
             $level3 = az boards work-item create `
@@ -52,7 +52,7 @@ for ($z = 1; $z -le 10; $z++) {
 
             Write-Host "    Created $level3Type $z.$i.$j with ID: $($level3.id)"
 
-            # Link Story to Feature
+            # Link Level3 to Level2
             az boards work-item relation add `
                 --id $level3.id `
                 --relation-type "Parent" `
